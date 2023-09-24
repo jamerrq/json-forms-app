@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "label": "Fecha de inicio",
+      "name": "start_date",
+      "required": false,
+      "type": "date"
+    },
+    {
+      "label": "¿Cómo nos encontraste?",
+      "name": "how_found",
+      "options": [
+        {
+          "label": "Amigos",
+          "value": "friends"
+        },
+        {
+          "label": "Búsqueda en línea",
+          "value": "online_search"
+        },
+        {
+          "label": "Publicidad",
+          "value": "advertisement"
+        }
+      ],
+      "required": true,
+      "type": "radio"
+    },
+    {
+      "label": "Enviar",
+      "type": "submit"
+    }
+  ]
+}

@@ -1,9 +1,11 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import Header from '@/app/components/header'
 
-const inter = Inter({ subsets: ['latin'] })
+const spaceGrotesk = localFont({
+  src: '../../public/fonts/SpaceGrotesk-VariableFont_wght.ttf'
+})
 
 export const metadata: Metadata = {
   title: 'Json Forms Generator',
@@ -17,7 +19,7 @@ export default function RootLayout ({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={spaceGrotesk.className}>
         <Header />
         {children}
       </body>

@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Json a Formulario App
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Esta aplicación permite convertir un archivo JSON a una interfaz de formulario
+web, la cual puede ser utilizada para crear un nuevo archivo JSON con los
+datos ingresados en el formulario.
+
+## Instalación
+
+Para instalar la aplicación, se debe clonar el repositorio y luego instalar las
+dependencias con el siguiente comando:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Instrucciones y Uso
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Para ejecutar la aplicación, se debe ejecutar el siguiente comando:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+pnpm start
+```
 
-## Learn More
+Luego, se debe abrir el navegador en la siguiente dirección:
+`http://localhost:3000/`, donde se podrá ver la aplicación en funcionamiento.
 
-To learn more about Next.js, take a look at the following resources:
+La aplicación consta de 3 secciones principales:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- La sección `Convertidor` permite convertir un archivo JSON a una interfaz de
+  formulario web.
+- La sección `Formularios` permite ver los formularios creados a partir de la
+  sección `Convertidor` así como las respuestas enviadas a cada formulario.
+- La sección `Instrucciones` muestra las instrucciones de uso de la aplicación.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Herramientas utilizadas
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat&logo=next.js)
+![Supabase](https://img.shields.io/badge/-Supabase-000000?style=flat&logo=supabase)
+![Tailwind
+CSS](https://img.shields.io/badge/-Tailwind%20CSS-000000?style=flat&logo=tailwind-css)
+![TypeScript](https://img.shields.io/badge/-TypeScript-000000?style=flat&logo=typescript)
+![Vercel](https://img.shields.io/badge/-Vercel-000000?style=flat&logo=vercel)
+![EsLint](https://img.shields.io/badge/-EsLint-000000?style=flat&logo=eslint)
