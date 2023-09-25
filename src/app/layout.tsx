@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Header from '@/app/components/header'
 
+export const dynamic = 'force-dynamic'
+
 const spaceGrotesk = localFont({
   src: '../../public/fonts/SpaceGrotesk-VariableFont_wght.ttf'
 })

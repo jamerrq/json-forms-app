@@ -5,7 +5,7 @@ import { useCallback, useState } from 'react'
 import LoadingSpinner from './loading-spinner'
 import { generateUniqueHash, validateJsonContentForm } from '@/app/utils/json'
 import { JsonViewer } from '@textea/json-viewer'
-import { uploadFormToSupabase } from '@/app/utils/supabaseActions'
+import { uploadForm } from '@/app/utils/supabaseActions'
 import Swal from 'sweetalert2'
 
 type Document = Record<string, any>
@@ -63,7 +63,7 @@ export default function Dropzone () {
 
   const uploader = async () => {
     setIsUploading(true)
-    const result = await uploadFormToSupabase(form)
+    const result = await uploadForm(form)
     if (result >= 400) {
       if (result === 409) {
         // alert('Ya existe un formulario con ese hash')

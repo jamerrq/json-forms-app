@@ -1,6 +1,6 @@
-import { getAnswersFromSupabase } from '@/app/utils/supabaseActions'
+import { getAnswersByFormId } from '@/app/utils/supabaseActions'
 
-function getFields (answers: Array<Record<string, any>>) {
+function getFields (answers: Array<Record<string, string>>) {
   const fields: string[] = []
   answers.forEach((answer) => {
     Object.keys(answer).forEach((key) => {
@@ -14,7 +14,7 @@ function getFields (answers: Array<Record<string, any>>) {
 
 export default async function AnswersPage ({ params }: { params: { formid: string } }) {
   const { formid } = params
-  const answers = await getAnswersFromSupabase(formid)
+  const answers = await getAnswersByFormId(formid)
   return (
     <main className="flex flex-col items-center justify-center p-12">
       <h1 className="text-xl font-semibold mb-2">
@@ -41,8 +41,8 @@ export default async function AnswersPage ({ params }: { params: { formid: strin
         </thead>
         <tbody>
           {
-            answers.map((answer) => (
-              <tr key={answer.id}>
+            answers.map((answer, index) => (
+              <tr key={index}>
                 {
                   getFields(answers).map((field) => (
                     <td key={field} className="px-1 border-r-2 border-b-2">{answer[field]}</td>

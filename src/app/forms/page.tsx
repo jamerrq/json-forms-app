@@ -1,10 +1,15 @@
-import { getFormsFromSupabase } from '@/app/utils/supabaseActions'
+import { getForms } from '@/app/utils/supabaseActions'
 import { IconEye } from '@tabler/icons-react'
 
 export default async function FormsPage () {
-  const forms = await getFormsFromSupabase()
+  const forms = await getForms()
   return (
-    <main className="flex flex-col items-center justify-center p-12 gap-3">
+    <main className="flex flex-col items-center justify-center p-12 gap-3 max-w-[500px] mx-auto">
+      {
+        forms?.length === 0
+          ? <p className="text-center">No hay formularios creados</p>
+          : null
+      }
       {
         forms?.map((form: any) => {
           return (

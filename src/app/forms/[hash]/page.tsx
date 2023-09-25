@@ -1,9 +1,9 @@
-import { getFormFromSupabase } from '@/app/utils/supabaseActions'
+import { getFormById } from '@/app/utils/supabaseActions'
 import Form from './client'
 
 export default async function HashedForm ({ params }: { params: { hash: string } }) {
   const { hash } = params
-  const form = await getFormFromSupabase(hash)
+  const form = await getFormById(hash)
   return (
     <div className="grid place-content-center">
       <Form items={form?.items} hash={hash} />
