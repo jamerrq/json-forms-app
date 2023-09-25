@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Header from '@/app/components/header'
+import { AuthBanner } from '@/app/components/auth-banner-server'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,6 +25,7 @@ export default function RootLayout ({
       <body className={spaceGrotesk.className}>
         <Header />
         {children}
+        <AuthBanner />
       </body>
     </html>
   )

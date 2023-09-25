@@ -8,6 +8,8 @@ import { JsonViewer } from '@textea/json-viewer'
 import { uploadForm } from '@/app/utils/supabaseActions'
 import Swal from 'sweetalert2'
 
+import { useRouter } from 'next/navigation'
+
 type Document = Record<string, any>
 const ViewerComponent = (object: Document) => <JsonViewer value={object} defaultInspectDepth={1} displayDataTypes={false} rootName={'raíz'} />
 
@@ -16,6 +18,7 @@ export default function Dropzone () {
   const [innerContent, setInnerContent] = useState('')
   const [isUploading, setIsUploading] = useState(false)
   const [hash, setHash] = useState('')
+  const router = useRouter()
 
   const [form, setForm] = useState<FormData>(new FormData())
 
@@ -33,13 +36,25 @@ export default function Dropzone () {
     setIsProcessing(true)
     reader.onabort = () => { console.log('file reading was aborted') }
     reader.onerror = () => { console.log('file reading has failed') }
-    reader.onload = () => {
+    reader.onload = async () => {
       const binaryStr = reader.result
-      // console.log(binaryStr)
       // validate json
       const isValid = validateJsonContentForm(binaryStr as string)
       if (!isValid) {
-        alert('El archivo JSON no tiene el formato correcto')
+        // Ask for going to documentation or try again
+        await Swal.fire({
+          title: 'El archivo JSON no es válido',
+          text: '¿Deseas ver la documentación?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí',
+          cancelButtonText: 'No'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push('/instructions')
+          }
+        })
+        setIsProcessing(false)
         return
       }
       setInnerContent(binaryStr as string)
