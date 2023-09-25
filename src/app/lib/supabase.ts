@@ -1,11 +1,10 @@
-// import { createClient } from '@supabase/supabase-js'
+// import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
+// import { type NextApiRequest, type NextApiResponse } from 'next'
+// import cookie from 'cookie'
 
-// export const supabase = createClient(
-//   process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-//   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-// )
-
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-
-export const supabase = createServerComponentClient({ cookies })
+// export default async function handler (req: NextApiRequest, res: NextApiResponse) {
+//   const cookies = cookie.parse(req.headers.cookie ?? '')
+//   const cookiesFunction = () => cookies as ReadonlyRequestCookies
+//   const supabase = createServerActionClient({ cookies: cookiesFunction })
+//   // ...
+// }

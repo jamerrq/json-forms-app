@@ -2,8 +2,18 @@
 import { cookies } from 'next/headers'
 import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
 import { revalidatePath } from 'next/cache'
-// import { supabase } from '../lib/supabase'
 const supabase = createServerActionClient({ cookies })
+
+export const getFormsFromSupabase = async (): Promise<Form[]> => {
+  const { data, error } = await supabase.from('forms').select('*')
+  if (error !== null) {
+    throw new Error(error.message)
+  }
+  if (data === null) {
+    throw new Error('data is null')
+  }
+  return data
+}
 
 export const uploadFormToSupabase = async (formData: FormData) => {
   const id = formData.get('hash')

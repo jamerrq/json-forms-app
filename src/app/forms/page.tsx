@@ -1,8 +1,8 @@
-import { supabase } from '../lib/supabase'
+import { getFormsFromSupabase } from '@/app/utils/supabaseActions'
 import { IconEye } from '@tabler/icons-react'
 
 export default async function FormsPage () {
-  const { data: forms } = await supabase.from('forms').select('*')
+  const forms = await getFormsFromSupabase()
   return (
     <main className="flex flex-col items-center justify-center p-12 gap-3">
       {
