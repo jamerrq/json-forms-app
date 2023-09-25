@@ -3,7 +3,7 @@
 import { useDropzone } from 'react-dropzone'
 import { useCallback, useState } from 'react'
 import LoadingSpinner from './loading-spinner'
-import { generateUniqueHash } from '@/app/utils/json'
+import { generateUniqueHash, validateJsonContentForm } from '@/app/utils/json'
 import { JsonViewer } from '@textea/json-viewer'
 import { uploadFormToSupabase } from '@/app/utils/supabaseActions'
 import Swal from 'sweetalert2'
@@ -36,6 +36,12 @@ export default function Dropzone () {
     reader.onload = () => {
       const binaryStr = reader.result
       // console.log(binaryStr)
+      // validate json
+      const isValid = validateJsonContentForm(binaryStr as string)
+      if (!isValid) {
+        alert('El archivo JSON no tiene el formato correcto')
+        return
+      }
       setInnerContent(binaryStr as string)
       // update form
       // const jsonFile = new File([binaryStr as string], file.name, { type:
