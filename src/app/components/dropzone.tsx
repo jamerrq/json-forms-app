@@ -7,13 +7,14 @@ import { generateUniqueHash, validateJsonContentForm } from '@/app/utils/json'
 import { JsonViewer } from '@textea/json-viewer'
 import { uploadForm } from '@/app/utils/supabaseActions'
 import Swal from 'sweetalert2'
+import { type Session } from '@supabase/auth-helpers-nextjs'
 
 import { useRouter } from 'next/navigation'
 
 type Document = Record<string, any>
-const ViewerComponent = (object: Document) => <JsonViewer value={object} defaultInspectDepth={1} displayDataTypes={false} rootName={'raíz'} />
+const ViewerComponent = (object: Document) => <JsonViewer value={object} defaultInspectDepth={1} displayDataTypes={false} rootName={'raíz'} className="w-[316px]"/>
 
-export default function Dropzone () {
+export default function Dropzone ({ session }: { session: Session | null }) {
   const [isProcessing, setIsProcessing] = useState(false)
   const [innerContent, setInnerContent] = useState('')
   const [isUploading, setIsUploading] = useState(false)
@@ -55,20 +56,31 @@ export default function Dropzone () {
           }
         })
         setIsProcessing(false)
-        return
+      } else {
+        // check if session is valid
+        if (session === null) {
+          await Swal.fire({
+            title: 'Error de autenticación',
+            text: 'Debes iniciar sesión para poder crear un formulario',
+            icon: 'error'
+          })
+          setIsProcessing(false)
+          return
+        }
+        setInnerContent(binaryStr as string)
+        // update form
+        // const jsonFile = new File([binaryStr as string], file.name, { type:
+        // file.type })
+        const hash = generateUniqueHash(binaryStr as string)
+        setHash(hash)
+        setForm(new FormData())
+        setForm((prev) => {
+          prev.append('json', binaryStr as string)
+          prev.append('hash', hash)
+          prev.append('owner', session.user.id)
+          return prev
+        })
       }
-      setInnerContent(binaryStr as string)
-      // update form
-      // const jsonFile = new File([binaryStr as string], file.name, { type:
-      // file.type })
-      const hash = generateUniqueHash(binaryStr as string)
-      setHash(hash)
-      setForm(new FormData())
-      setForm((prev) => {
-        prev.append('json', binaryStr as string)
-        prev.append('hash', hash)
-        return prev
-      })
     }
     reader.readAsText(file)
     setIsProcessing(false)
@@ -80,6 +92,14 @@ export default function Dropzone () {
     setIsUploading(true)
     const result = await uploadForm(form)
     if (result >= 400) {
+      if (result === 401) {
+        setIsUploading(false)
+        return await Swal.fire({
+          title: 'Error de autenticación',
+          text: 'Debes iniciar sesión para poder crear un formulario',
+          icon: 'error'
+        })
+      }
       if (result === 409) {
         // alert('Ya existe un formulario con ese hash')
         await Swal.fire({
@@ -91,7 +111,8 @@ export default function Dropzone () {
           cancelButtonText: 'No'
         }).then((result) => {
           if (result.isConfirmed) {
-            window.open(`/forms/${hash}`)
+            // window.open(`/forms/${hash}`)
+            router.push(`/forms/${hash}`)
           }
         })
       } else {
@@ -112,7 +133,8 @@ export default function Dropzone () {
         icon: 'success'
       }).then((result) => {
         if (result.isConfirmed) {
-          window.open(`/forms/${hash}`)
+          // window.open(`/forms/${hash}`)
+          router.push(`/forms/${hash}`)
         }
       })
     }

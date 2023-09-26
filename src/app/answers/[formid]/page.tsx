@@ -1,9 +1,10 @@
 import { getAnswersByFormId } from '@/app/utils/supabaseActions'
+import { IconEdit } from '@tabler/icons-react'
 
-function getFields (answers: Array<Record<string, string>>) {
+function getFields (answers: Answer[]) {
   const fields: string[] = []
   answers.forEach((answer) => {
-    Object.keys(answer).forEach((key) => {
+    Object.keys(answer.fields).forEach((key) => {
       if (!fields.includes(key)) {
         fields.push(key)
       }
@@ -15,6 +16,7 @@ function getFields (answers: Array<Record<string, string>>) {
 export default async function AnswersPage ({ params }: { params: { formid: string } }) {
   const { formid } = params
   const answers = await getAnswersByFormId(formid)
+  console.log(answers)
   return (
     <main className="flex flex-col items-center justify-center p-12">
       <h1 className="text-xl font-semibold mb-2">
@@ -45,9 +47,14 @@ export default async function AnswersPage ({ params }: { params: { formid: strin
               <tr key={index}>
                 {
                   getFields(answers).map((field) => (
-                    <td key={field} className="px-1 border-r-2 border-b-2">{answer[field]}</td>
+                    <td key={field} className="px-1 border-r-2 border-b-2">{answer.fields[field]}</td>
                   ))
                 }
+                <td>
+                  <a title="Editar Respuestas" href={`/edit/${formid}/${answer.id}`}>
+                    <IconEdit size={24} stroke={2} color="#10B981" />
+                  </a>
+                </td>
               </tr>
             ))
           }

@@ -2,6 +2,8 @@
 import { uploadAnswers } from '@/app/utils/supabaseActions'
 import { useRef } from 'react'
 import Swal from 'sweetalert2'
+import { useRouter } from 'next/navigation'
+import { type Session } from '@supabase/auth-helpers-nextjs'
 
 function createItem (item: {
   type: string
@@ -96,7 +98,8 @@ function createItem (item: {
   }
 }
 
-export default function Form ({ items, hash }: { items: FormItem[], hash: string }) {
+export default function Form ({ items, hash, session, preload }: { items: FormItem[], hash: string, session: Session | null, preload?: Record<string, string> }) {
+  const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
   const cleanForm = () => {
     formRef.current?.reset()
@@ -104,6 +107,13 @@ export default function Form ({ items, hash }: { items: FormItem[], hash: string
   const submitForm = async (formData: FormData) => {
     const result = await uploadAnswers(formData)
     if (result >= 400) {
+      if (result === 401) {
+        return await Swal.fire({
+          title: 'Error de autenticación',
+          text: 'Debes iniciar sesión para poder enviar una respuesta',
+          icon: 'error'
+        })
+      }
       await Swal.fire({
         title: 'Error',
         text: 'No se pudo enviar el formulario. Por favor, intente nuevamente.',
@@ -120,7 +130,8 @@ export default function Form ({ items, hash }: { items: FormItem[], hash: string
         cancelButtonText: 'Enviar otro formulario'
       })
       if (isConfirmed) {
-        window.location.href = `/answers/${hash}`
+        // window.location.href = `/answers/${hash}`
+        router.push(`/answers/${hash}`)
       } else {
         cleanForm()
       }
@@ -133,6 +144,8 @@ export default function Form ({ items, hash }: { items: FormItem[], hash: string
     }} className="flex flex-col items-center justify-center p-6 gap-3">
       <h1 className="font-semibold text-lime-600">Hash: {hash}</h1>
       <input type="hidden" name="hash" id="hash" value={hash} />
+      <input type="hidden" name="owner" id="owner" value={session?.user?.id} />
+      {preload !== null && JSON.stringify(preload)}
       {items.map((item, index) => createItem(item, index))}
     </form>
   )

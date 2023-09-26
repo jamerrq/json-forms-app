@@ -57,8 +57,10 @@
       "type": "radio"
     },
     {
-      "label": "Enviar",
-      "type": "submit"
+      "label": "¿Desea recibir nuestro boletín informativo?",
+      "name": "newsletter_subscription",
+      "required": false,
+      "type": "checkbox"
     }
   ]
 }

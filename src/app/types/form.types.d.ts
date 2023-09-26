@@ -10,4 +10,7 @@ interface Form {
   items: FormItem[]
 }
 
-type Answer = Record<string, string>
+interface Answer {
+  id: string
+  fields: Record<string, string>
+}
