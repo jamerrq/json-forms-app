@@ -1,5 +1,5 @@
 import { getAnswersByFormId } from '@/app/utils/supabaseActions'
-import { IconEdit } from '@tabler/icons-react'
+import { IconEdit, IconCalendarTime } from '@tabler/icons-react'
 
 function getFields (answers: Answer[]) {
   const fields: string[] = []
@@ -16,7 +16,7 @@ function getFields (answers: Answer[]) {
 export default async function AnswersPage ({ params }: { params: { formid: string } }) {
   const { formid } = params
   const answers = await getAnswersByFormId(formid)
-  console.log(answers)
+  // console.log(answers)
   return (
     <main className="flex flex-col items-center justify-center p-12">
       <h1 className="text-xl font-semibold mb-2">
@@ -31,9 +31,12 @@ export default async function AnswersPage ({ params }: { params: { formid: strin
             )
           : null
       }
-      <table className="table-auto gap-5 text-right border-2 border-spacing-1 [&>th]:[border-r-1]">
+      <table className="table-auto gap-5 text-right border-2 border-spacing-1">
         <thead>
           <tr className="border-2">
+            <th className="border-r-2">
+              <IconCalendarTime size={24} stroke={2} color="#10B981" className="mx-auto"/>
+            </th>
             {
               getFields(answers).map((field) => (
                 <th key={field} className="px-2 border-r-2">{field}</th>
@@ -45,6 +48,7 @@ export default async function AnswersPage ({ params }: { params: { formid: strin
           {
             answers.map((answer, index) => (
               <tr key={index}>
+                <td className="px-1 border-r-2 border-b-2">{answer.created_at.toLocaleString()}</td>
                 {
                   getFields(answers).map((field) => (
                     <td key={field} className="px-1 border-r-2 border-b-2">{answer.fields[field]}</td>

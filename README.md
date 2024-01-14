@@ -6,33 +6,12 @@ Esta aplicación permite convertir un archivo JSON a una interfaz de formulario
 web, la cual puede ser utilizada para crear un nuevo archivo JSON con los
 datos ingresados en el formulario.
 
-## Instalación
+## Despliegue
 
-Para instalar la aplicación, se debe clonar el repositorio y luego instalar las
-dependencias con el siguiente comando:
+La aplicación se encuentra desplegada en Vercel, y puede ser accedida a través
+de
 
-```bash
-pnpm install
-```
-
-## Instrucciones y Uso
-
-Para ejecutar la aplicación, se debe ejecutar el siguiente comando:
-
-```bash
-pnpm start
-```
-
-Luego, se debe abrir el navegador en la siguiente dirección:
-`http://localhost:3000/`, donde se podrá ver la aplicación en funcionamiento.
-
-La aplicación consta de 3 secciones principales:
-
-- La sección `Convertidor` permite convertir un archivo JSON a una interfaz de
-  formulario web.
-- La sección `Formularios` permite ver los formularios creados a partir de la
-  sección `Convertidor` así como las respuestas enviadas a cada formulario.
-- La sección `Instrucciones` muestra las instrucciones de uso de la aplicación.
+[json-forms-app.vercel.app](json-forms-app.vercel.app)
 
 ## Herramientas utilizadas
 

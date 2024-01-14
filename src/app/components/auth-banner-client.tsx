@@ -6,6 +6,8 @@ import GitHubIcon from '../icons/GithubIcon'
 import { IconLogout } from '@tabler/icons-react'
 import Image from 'next/image'
 
+const REDIRECTION_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/auth/callback' : 'https://json-forms-app.vercel.app/auth/callback'
+
 export function AuthBannerClient ({ session }: { session: Session | null }) {
   const supabase = createClientComponentClient()
   const router = useRouter()
@@ -14,7 +16,7 @@ export function AuthBannerClient ({ session }: { session: Session | null }) {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: 'https://json-forms-app.vercel.app/auth/callback'
+        redirectTo: REDIRECTION_URL
       }
     })
   }
@@ -27,7 +29,7 @@ export function AuthBannerClient ({ session }: { session: Session | null }) {
   const buttonStyle = 'text-white bg-[#24292F] focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center focus:ring-gray-500 hover:bg-[#050708]/30 self-center'
 
   return (
-    <header className="grid fixed bottom-2 place-content-center w-full">
+    <header className="flex fixed bottom-0 backdrop-blur-2xl py-1 items-center justify-center gap-2 w-full bg-[#475569]">
       {
         session === null
           ? (
@@ -38,10 +40,12 @@ export function AuthBannerClient ({ session }: { session: Session | null }) {
             )
           : (
             <div className="flex gap-2 items-center">
-              <Image src={session.user?.user_metadata?.avatar_url} alt="" width={40} height={40} className="rounded-xl border-2 border-white inline">
+              <Image src={session.user?.user_metadata?.avatar_url} alt="" width={40} height={40} className="rounded-xl border-2 border-[#4ADE80] inline">
               </Image>
           <button className={buttonStyle} onClick={handleSignOut}>
+            <div title="Local Environment">
             <IconLogout />
+            </div>
             &nbsp;Cerrar sesión
           </button>
             </div>

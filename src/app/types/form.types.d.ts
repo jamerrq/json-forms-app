@@ -13,4 +13,5 @@ interface Form {
 interface Answer {
   id: string
   fields: Record<string, string>
+  created_at: Date
 }

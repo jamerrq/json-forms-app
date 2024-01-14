@@ -14,12 +14,16 @@ export default async function FormsPage () {
         forms?.map((form: any) => {
           return (
             <div className="grid grid-cols-[1fr,30px] w-full gap-1" key={form.id}>
-              <a href={`/forms/${form.id}`} key={form.id} className="flex flex-col gap-2 bg-slate-500 py-2 rounded text-center justify-items-center items-center font-semibold hover:scale-105 transition-all duration-200 ease-in-out cursor-pointer">
-                <p>{form.id}</p>
-              </a>
-              <a href={`/answers/${form.id}`} className="flex flex-col gap-2 bg-green-500 py-2 rounded text-center justify-items-center items-center font-semibold hover:scale-105 transition-all duration-200 ease-in-out cursor-pointer px-1" title="Ver Respuestas">
-                <IconEye />
-              </a>
+              <main className="bg-[#16A34A] rounded-sm hover:scale-105 duration-200 ease-in-out">
+                <a href={`/forms/${form.id}`} key={form.id} className="flex flex-col gap-2 bg-[#64748B] py-2 rounded text-center justify-items-center items-center font-semibold">
+                  <p>{form.id}</p>
+                </a>
+              </main>
+              <aside className="bg-[#14B8A6] rounded-sm hover:scale-105 duration-200 ease-in-out">
+                <a href={`/answers/${form.id}`} className="flex flex-col py-2 rounded text-center justify-items-center items-center font-semibold px-1" title="Ver Respuestas">
+                  <IconEye />
+                </a>
+              </aside>
             </div>
           )
         })

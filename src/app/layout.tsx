@@ -22,7 +22,7 @@ export default function RootLayout ({
 }) {
   return (
     <html lang="en">
-      <body className={spaceGrotesk.className}>
+      <body className={`${spaceGrotesk.className} overflow-x-hidden`}>
         <Header />
         {children}
         <AuthBanner />

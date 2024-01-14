@@ -30,8 +30,24 @@ export default function Dropzone ({ session }: { session: Session | null }) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const [file] = acceptedFiles
     if (file === null || file.type !== 'application/json') {
-      alert('Solo se permiten archivos JSON')
-      return
+      console.log('type', file.type)
+      // alert('Solo se permiten archivos JSON')
+      Swal.fire({
+        title: 'Solo se permiten archivos JSON',
+        text: '¿Deseas ver la documentación?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('/instructions')
+        }
+      }).catch((err) => {
+        console.info('Error redirecting to instructions page:')
+        console.error(err)
+      })
+      // return
     }
     const reader = new FileReader()
     setIsProcessing(true)
@@ -142,7 +158,7 @@ export default function Dropzone ({ session }: { session: Session | null }) {
   }
 
   return (
-    <section className="bg-slate-50 flex gap-4 flex-col rounded p-4 text-[#000000aa]">
+    <section className="bg-[#F8FAFC] flex gap-4 flex-col rounded p-4 text-[#000000aa]">
       <div {...getRootProps()} className="border-4 border-dashed rounded px-4 py-6 grid font-semibold items-center place-content-center border-[#bdbdbd] bg-[#fafafa] text-[#000000aa] ease-in-out transtiion-all">
         <input {...getInputProps()} />
         {
@@ -163,7 +179,7 @@ export default function Dropzone ({ session }: { session: Session | null }) {
             ? (<>
               <p className="font-bold">Contenido</p>
               {
-                ViewerComponent(JSON.parse(innerContent))
+                ViewerComponent(JSON.parse(innerContent) as Document)
               }
               <p className="font-bold">Hash</p>
               <p className="font-semibold">{generateUniqueHash(innerContent)}</p>
@@ -174,7 +190,7 @@ export default function Dropzone ({ session }: { session: Session | null }) {
       <form className="w-full grid" action={uploader}>
         <button disabled={
           !fileWasUploaded()
-        } className='rounded bg-slate-950 text-white py-1 font-semibold disabled:bg-slate-400'>
+        } className='rounded bg-[#020617] text-[#fff] py-1 font-semibold disabled:bg-[#94A3B8]'>
           {
             isUploading && (
               <svg aria-hidden="true" role="status" className="inline w-4 h-4 mr-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

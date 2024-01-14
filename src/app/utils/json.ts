@@ -61,7 +61,7 @@ export function validateJsonContentForm (jsonContent: string): boolean {
   }
   // It has to have a items array
   const json = JSON.parse(jsonContent) as Form
-  console.log(json)
+  // console.log(json)
   if (json.items === undefined || !Array.isArray(json.items)) {
     return false
   }
@@ -70,7 +70,7 @@ export function validateJsonContentForm (jsonContent: string): boolean {
   const validation = json.items.every((item) => {
     // Each item has to have a type, name and label (required is optional)
     if (!validateItem(item)) {
-      console.log(item)
+      // console.log(item)
       return false
     }
     // Each item has to have a unique name
@@ -85,6 +85,6 @@ export function validateJsonContentForm (jsonContent: string): boolean {
     labels.push(item.label)
     return true
   })
-  console.log(names, labels)
+  // console.log(names, labels)
   return validation
 }

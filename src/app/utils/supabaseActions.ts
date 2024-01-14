@@ -7,11 +7,13 @@ export const getForms = async (): Promise<Form[]> => {
   const supabase = createServerActionClient({ cookies })
   const { data, error } = await supabase.from('forms').select('*')
   if (error !== null) {
+    console.info('Error getting forms')
+    console.error(error)
     throw new Error(error.message)
   }
-  if (data === null) {
-    throw new Error('data is null')
-  }
+  // if (data === null) {
+  //   throw new Error('data is null')
+  // }
   return data
 }
 
@@ -55,23 +57,24 @@ export const uploadAnswers = async (formData: FormData) => {
 export const getAnswersByFormId = async (formId: string): Promise<Answer[]> => {
   const supabase = createServerActionClient({ cookies })
   const { data, error } = await supabase.from('answers').select('*').eq('form_id', formId)
+  // console.log(data)
   if (error !== null) {
     throw new Error(error.message)
   }
   if (data === null) {
     throw new Error('data is null')
   }
-  return data.map((answer) => { return { id: answer.id, fields: answer.fields } })
+  return data.map((answer) => { return { id: answer.id, fields: answer.fields, created_at: new Date(answer.created_at) } })
 }
 
 export const getAnswerByIdFormId = async (formId: string, id: string): Promise<Answer> => {
-  // const supabase = createServerActionClient({ cookies })
-  // const { data, error } = await supabase.from('answers').select('*').eq('form_id', formId).eq('id', id)
-  // if (error !== null) {
-  //   throw new Error(error.message)
-  // }
-  // if (data === null) {
-  //   throw new Error('data is null')
-  // }
-  // return data.fields
+  const supabase = createServerActionClient({ cookies })
+  const { data, error } = await supabase.from('answers').select('*').eq('form_id', formId).eq('id', id).single()
+  if (error !== null) {
+    throw new Error(error.message)
+  }
+  if (data === null) {
+    throw new Error('data is null')
+  }
+  return data
 }
