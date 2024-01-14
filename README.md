@@ -11,14 +11,39 @@ datos ingresados en el formulario.
 La aplicación se encuentra desplegada en Vercel, y puede ser accedida a través
 de
 
-[json-forms-app.vercel.app](json-forms-app.vercel.app)
+[json-forms-app.vercel.app](https://json-forms-app.vercel.app)
 
-## Herramientas utilizadas
+## Información relevante
 
-![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat&logo=next.js)
-![Supabase](https://img.shields.io/badge/-Supabase-000000?style=flat&logo=supabase)
-![Tailwind
-CSS](https://img.shields.io/badge/-Tailwind%20CSS-000000?style=flat&logo=tailwind-css)
-![TypeScript](https://img.shields.io/badge/-TypeScript-000000?style=flat&logo=typescript)
-![Vercel](https://img.shields.io/badge/-Vercel-000000?style=flat&logo=vercel)
-![EsLint](https://img.shields.io/badge/-EsLint-000000?style=flat&logo=eslint)
+Esta aplicación fue desarrollada como parte de un desafío fullstack para
+una presentación técnica. Puedes encontrar más información en el siguiente
+documento:
+
+[PDF](/public/challenge.pdf)
+
+### Tecnologías
+
+[![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat&logo=next.js)](https://nextjs.org/)
+[![Supabase](https://img.shields.io/badge/-Supabase-000000?style=flat&logo=supabase)](https://supabase.io/)
+[![Tailwind
+CSS](https://img.shields.io/badge/-Tailwind%20CSS-000000?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
+
+
+### Tópicos
+
+- [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
+- [API Routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes)
+- [Supabase REST API](https://supabase.io/docs/guides/api)
+- [Autenficación con Supabase](https://supabase.io/docs/guides/auth)
+
+## Instrucciónes de uso
+
+Para instrucciones de uso, dirígite al siguiente enlace:
+
+[Instrucciones](https://json-forms-app.vercel.app/instructions)
+
+## Licencia
+
+[![MIT License](https://img.shields.io/badge/-MIT%20License-000000?style=flat&logo=mit-license)](/LICENSE)
+
+

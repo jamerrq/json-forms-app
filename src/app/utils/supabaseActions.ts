@@ -11,9 +11,9 @@ export const getForms = async (): Promise<Form[]> => {
     console.error(error)
     throw new Error(error.message)
   }
-  // if (data === null) {
-  //   throw new Error('data is null')
-  // }
+  if (data === null) {
+    throw new Error('data is null')
+  }
   return data
 }
 
@@ -43,7 +43,7 @@ export const getFormById = async (id: string): Promise<Form> => {
   if (data === null) {
     throw new Error('data is null')
   }
-  return JSON.parse(data.json_content)
+  return JSON.parse(data.json_content as string)
 }
 
 export const uploadAnswers = async (formData: FormData) => {
@@ -64,7 +64,7 @@ export const getAnswersByFormId = async (formId: string): Promise<Answer[]> => {
   if (data === null) {
     throw new Error('data is null')
   }
-  return data.map((answer) => { return { id: answer.id, fields: answer.fields, created_at: new Date(answer.created_at) } })
+  return data.map((answer) => { return { id: answer.id, fields: answer.fields, created_at: new Date(answer.created_at as string | Date | number) } })
 }
 
 export const getAnswerByIdFormId = async (formId: string, id: string): Promise<Answer> => {

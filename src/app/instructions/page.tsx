@@ -111,6 +111,44 @@ export default function InstructionsPage () {
           </p>
         </li>
       </ul>
+      <h2 className="text-accent font-semibold text-xl">
+        Stack
+      </h2>
+      <ul className="flex gap-2">
+        <li>
+          <a href="https://nextjs.org/" target="_blank" rel="noopener noreferrer" className="text-accent font-bold">
+            {/* eslint-disable-next-line */}
+            <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" className="border-accent border"/>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer" className="text-accent font-bold">
+            {/* eslint-disable-next-line */}
+            <img src="https://img.shields.io/badge/TypeScript-000?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" className="border-accent border"/>
+          </a>
+        </li>
+        <li>
+          {/* Tailwind */}
+          <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" className="text-accent font-bold">
+            {/* eslint-disable-next-line */}
+            <img src="https://img.shields.io/badge/TailwindCSS-000?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="TailwindCSS" className="border-accent border"/>
+          </a>
+        </li>
+        <li>
+          {/* Supabase */}
+          <a href="https://supabase.io/" target="_blank" rel="noopener noreferrer" className="text-accent font-bold">
+            {/* eslint-disable-next-line */}
+            <img src="https://img.shields.io/badge/Supabase-000?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" className="border-accent border"/>
+          </a>
+        </li>
+        </ul>
+      <h2 className="text-accent font-semibold text-xl">
+        Repositorio
+      </h2>
+      <a href="https://github.com/jamerrq/json-forms-app" target="_blank" rel="noopener noreferrer" className="text-accent font-bold">
+        {/* eslint-disable-next-line */}
+        <img src="https://img.shields.io/badge/Github-000?style=for-the-badge&logo=github&logoColor=white" alt="Github" className="border-accent border"/>
+      </a>
     </main>
   )
 }
